@@ -1,0 +1,63 @@
+services:
+  
+  keila:
+    image: azamaziz/alainmails:latest
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+    build:
+      context: ../
+      dockerfile: ops/Dockerfile
+    environment:
+      MIX_ENV: "prod"
+      DB_URL: "etco://postgres:postgres@postgres/postgres"
+      URL_HOST: "localhost"
+      URL_PATH: "/"
+      URL_SCHEMA: "http"
+      PORT: "80"
+      URL_PORT: "80"
+      KEILA_USER: "alainmails@localhost"
+      KEILA_PASSWORD: "alainmails"
+      SECRET_KEY_BASE: "Y1l1subhSq66zL02V05rPpU/ToUm/JYMUM4RIQy5GHkF+N0sVLRabAY9TEWchv4r"
+      MAILER_SMTP_HOST: "smtp.gmail.com"
+      MAILER_SMTP_PORT: "587"
+      MAILER_SMTP_USER: " "
+      MAILER_SMTP_PASSWORD: " "
+      CAPTCHA_SITE_KEY: " "
+      CAPTCHA_SECRET_KEY: " "
+      MAILER_SMTP_FROM_EMAIL: "sender@alainmails.com"
+      MAILER_ENABLE_STARTTLS: "true"
+      ENABLE_QUOTAS: "true" 
+    
+    volumes: 
+      - uploads:/opt/app/uploads
+      
+    
+    
+     
+        
+  
+  postgres:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+     
+    
+
+volumes:
+  pgdata:
+    driver: local
+  uploads:
+    driver: local
+
+
+

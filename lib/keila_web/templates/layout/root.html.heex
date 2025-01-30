@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tag() %>
+    <title>
+      <%= get_meta(
+        @conn,
+        view_module(@conn),
+        view_template(@conn),
+        :title,
+        gettext("Email Marketing Solution")
+      ) <> " · AlainMails" %>
+    </title>
+    <meta property="og:image" content={Routes.static_url(@conn, "/images/og_image.png")} />
+    <meta property="og:description" content="Email Marketing Solution" />
+    <meta name="twitter:card" content="summary" />
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/css/app.css")} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/js/app.js")}
+    >
+    </script>
+  </head>
+  <%= if @current_user do %>
+    <body class="grid grid-cols-1 sm:grid-cols-[16em,1fr]">
+      <%= render("_menu.html", assigns) %>
+      <div>
+        <%= @inner_content %>
+        <%= render("_footer.html", assigns) %>
+      </div>
+    </body>
+  <% else %>
+    <body class="grid grid-cols-1">
+      <%= render("_menu.html", assigns) %>
+      <%= @inner_content %>
+      <%= render("_footer.html", assigns) %>
+    </body>
+  <% end %>
+</html>

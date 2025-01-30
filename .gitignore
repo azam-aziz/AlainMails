@@ -1,0 +1,23 @@
+# The static assets directory.
+/priv/static/
+
+# The uploads directory where user uploads are stored.
+/uploads/
+
+# The dependencies directory.
+/deps/
+
+# The build directory.
+/_build/
+
+# The directory NPM downloads your dependencies sources to.
+/assets/node_modules/
+
+# The ssl cert and key files.
+/priv/cert/cert.pem
+/priv/cert/key.pem
+
+# paddle public keys.
+/priv/vendor/paddle/public_key.sandbox.pem
+/priv/vendor/paddle/public_key.production.pem
+
